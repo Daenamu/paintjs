@@ -8,16 +8,11 @@ const saveBtn = document.getElementById("jsSave");
 const INITIAL_COLOR  = "#2c2c2c";
 const CANVAS_SIZE = 600;
 
-ctx.fillStyle = "white";
-ctx.fillRect(0, 0, canvas.width, canvas.height)
-
-ctx.strokeStyle = INITIAL_COLOR;
-ctx.fillStyle = INITIAL_COLOR;
-ctx.lineWidth = 2.5;
-
 let painting = false;
 let filling = false;
 
+
+//canvas functions
 function stopPainting() {
     painting = false;
 }
@@ -61,6 +56,8 @@ if (canvas) {
     canvas.addEventListener("contextmenu", handleCM)
 }
 
+
+//colors function
 function handleColorClick(event) {
     const color = event.target.style.backgroundColor;
     ctx.strokeStyle = color;
@@ -70,6 +67,8 @@ if (colors) {
     Array.from(colors).forEach(color => color.addEventListener("click", handleColorClick));
 }
 
+
+//range function
 function handleRangeChange(event) {
     const size = event.target.value;
     ctx.lineWidth = size;
@@ -78,6 +77,8 @@ if (range) {
     range.addEventListener("input", handleRangeChange)
 }
 
+
+//mode function
 function handleModeClick() {
     if (filling == true) {
         filling = false;
@@ -91,6 +92,8 @@ if (mode) {
     mode.addEventListener("click", handleModeClick)
 }
 
+
+//save function
 function handleSaveClick() {
     const image = canvas.toDataURL();
     const link = document.createElement("a");
@@ -102,3 +105,16 @@ function handleSaveClick() {
 if (saveBtn) {
     saveBtn.addEventListener("click", handleSaveClick)
 }
+
+
+//init function
+function init() {
+    ctx.fillStyle = "white";
+    ctx.fillRect(0, 0, canvas.width, canvas.height)
+
+    ctx.strokeStyle = INITIAL_COLOR;
+    ctx.fillStyle = INITIAL_COLOR;
+    ctx.lineWidth = 2.5;
+}
+
+init();
